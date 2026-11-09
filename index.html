@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Азимбек & Айпери | Үй тою</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Georgia, serif;
+    background: linear-gradient(135deg, #dce9f7, #fffaf0, #c8d9ed);
+    color: #17365d;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 15px;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 480px;
+}
+
+.music-button {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 20;
+    background: #244d7b;
+    color: white;
+    border: 1px solid #d7b66e;
+    border-radius: 30px;
+    padding: 12px 17px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* КОНВЕРТ */
+
+.envelope {
+    position: relative;
+    height: 310px;
+    background: linear-gradient(145deg, #416d9d, #17375f);
+    border-radius: 8px;
+    box-shadow: 0 20px 50px #17365d55;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.8s;
+}
+
+.envelope:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #315f91;
+    clip-path: polygon(0 0, 50% 55%, 100% 0);
+    z-index: 3;
+}
+
+.envelope:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #17375f;
+    clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+    z-index: 2;
+}
+
+.envelope-front {
+    position: absolute;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.ornament {
+    font-size: 35px;
+    color: #e8cf8b;
+    margin-bottom: 15px;
+}
+
+.envelope-front h1 {
+    font-size: 34px;
+    color: #f4dfaa;
+    margin: 15px 0;
+}
+
+.seal {
+    width: 55px;
+    height: 55px;
+    background: #d7b66e;
+    color: #17365d;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    margin-top: 20px;
+}
+
+.tap {
+    text-align: center;
+    margin: 22px 0;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    50% { opacity: 0.4; }
+}
+
+/* ЧАКЫРУУ КАТЫ */
+
+.invitation {
+    display: none;
+    background: #fffdf8;
+    border: 5px double #c5a45d;
+    border-radius: 12px;
+    padding: 35px 23px;
+    text-align: center;
+    box-shadow: 0 15px 45px #17365d33;
+}
+
+.invitation.show {
+    display: block;
+    animation: appear 1.2s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.flower {
+    font-size: 35px;
+    color: #c5a45d;
+    margin: 12px;
+}
+
+.small-title {
+    letter-spacing: 3px;
+    color: #9b7a3d;
+    margin-bottom: 18px;
+}
+
+.invitation h1 {
+    font-size: 36px;
+    color: #244d7b;
+    margin: 15px 0;
+}
+
+.invitation h2 {
+    color: #9b7a3d;
+    margin: 20px 0;
+}
+
+.message {
+    font-size: 17px;
+    line-height: 1.8;
+    margin: 18px 0;
+}
+
+.date {
+    background: #edf3fa;
+    border-top: 1px solid #c5a45d;
+    border-bottom: 1px solid #c5a45d;
+    padding: 20px 10px;
+    margin: 22px 0;
+}
+
+.date strong {
+    font-size: 30px;
+    color: #244d7b;
+}
+
+.details {
+    font-size: 16px;
+    line-height: 1.9;
+    margin: 20px 0;
+}
+
+.hosts {
+    color: #9b7a3d;
+    font-weight: bold;
+}
+
+.closing {
+    font-size: 19px;
+    font-style: italic;
+    color: #244d7b;
+    line-height: 1.7;
+    margin-top: 25px;
+}
+
+.footer {
+    color: #9b7a3d;
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+@media(max-width:400px) {
+    .invitation h1 {
+        font-size: 30px;
+    }
+
+    .message {
+        font-size: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<button class="music-button" id="musicButton">
+♫ Музыканы күйгүзүү
+</button>
+
+<div class="container">
+<div class="wrapper">
+
+    <div class="envelope" id="envelope">
+
+        <div class="envelope-front">
+
+            <div class="ornament">❀ ❀ ❀</div>
+
+            <p>СИЗГЕ АРНАЛГАН ЧАКЫРУУ</p>
+
+            <h1>Азимбек & Айпери</h1>
+
+            <p>ҮЙ ТОЮНА ЧАКЫРАБЫЗ</p>
+
+            <div class="seal">♥</div>
+
+        </div>
+
+    </div>
+
+    <p class="tap" id="tap">
+        ✨ Чакыруу катын ачуу үчүн басыңыз ✨
+    </p>
+
+    <div class="invitation" id="invitation">
+
+        <div class="flower">❀ ✧ ❀</div>
+
+        <p class="small-title">ТОЙГО ЧАКЫРУУ</p>
+
+        <h1>Азимбек & Айпери</h1>
+
+        <h2>Ардактуу коноктор!</h2>
+
+        <p class="message">
+            Ардактуу туугандар, куда-сөөк,
+            достор жана жакындарыбыз!
+            <br><br>
+            Сиздерди Азимбек менен Айперинин
+            кубанычтуу күнүнө арналган
+            үй тоюбузга чакырабыз!
+        </p>
+
+        <div class="date">
+            <strong>25 НОЯБРЬ</strong>
+            <p>Кубанычтуу күнүбүзгө күбө болуңуздар!</p>
+        </div>
+
+        <div class="details">
+            📍 <strong>Дареги:</strong>
+            <p>Аксы району, Кара-Жыгач айылы</p>
+            <p>Өз үйүбүздө</p>
+        </div>
+
+        <div class="details">
+            <strong>Той ээлери:</strong>
+            <p class="hosts">
+                Бубуайым · Айгүл · Нуржигит
+            </p>
+        </div>
+
+        <p class="closing">
+            Ак дасторконубуздун төрүнөн орун алып,
+            кубанычыбызга ортоктош болуп,
+            тойдун көркүн ачып кетиңиздер!
+            <br><br>
+            Тойго келип, конок болуп кетиңиздер!
+        </p>
+
+        <div class="flower">❀ ✧ ❀</div>
+
+        <p class="footer">
+            Сиздерди чыдамсыздык менен күтөбүз!
+        </p>
+
+    </div>
+
+</div>
+</div>
+
+<script>
+const envelope = document.getElementById("envelope");
+const invitation = document.getElementById("invitation");
+const tap = document.getElementById("tap");
+const musicButton = document.getElementById("musicButton");
+
+let audioContext = null;
+let musicTimer = null;
+let noteIndex = 0;
+let musicPlaying = false;
+let opened = false;
+
+/* РОМАНТИКАЛУУ ИНСТРУМЕНТАЛДЫК ОБОН */
+
+const melody = [
+    261.63, 329.63, 392.00, 329.63,
+    293.66, 349.23, 440.00, 349.23,
+    261.63, 329.63, 392.00, 440.00,
+    392.00, 349.23, 329.63, 293.66
+];
+
+function playNote(frequency, duration) {
+
+    if (!audioContext || !musicPlaying) return;
+
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.value = frequency;
+
+    gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+        0.12,
+        audioContext.currentTime + 0.08
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        audioContext.currentTime + duration
+    );
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + duration);
+}
+
+async function startMusic() {
+
+    try {
+
+        if (!audioContext) {
+            const AudioContextClass =
+                window.AudioContext || window.webkitAudioContext;
+
+            audioContext = new AudioContextClass();
+        }
+
+        await audioContext.resume();
+
+        if (musicPlaying) return;
+
+        musicPlaying = true;
+        musicButton.textContent = "♫ Музыканы өчүрүү";
+
+        noteIndex = 0;
+
+        musicTimer = setInterval(function() {
+
+            const note = melody[noteIndex % melody.length];
+
+            playNote(note, 1.2);
+
+            noteIndex++;
+
+        }, 650);
+
+    } catch (error) {
+
+        musicButton.textContent = "Музыканы кайра күйгүзүү";
+        console.log("Музыка катасы:", error);
+
+    }
+}
+
+function stopMusic() {
+
+    musicPlaying = false;
+
+    if (musicTimer) {
+        clearInterval(musicTimer);
+        musicTimer = null;
+    }
+
+    if (audioContext) {
+        audioContext.suspend();
+    }
+
+    musicButton.textContent = "♫ Музыканы күйгүзүү";
+}
+
+/* КОНВЕРТТИ АЧУУ */
+
+envelope.addEventListener("click", async function() {
+
+    if (opened) return;
+
+    opened = true;
+
+    await startMusic();
+
+    envelope.style.transform = "scale(0.8)";
+    envelope.style.opacity = "0";
+
+    tap.style.display = "none";
+
+    setTimeout(function() {
+
+        envelope.style.display = "none";
+        invitation.classList.add("show");
+
+    }, 800);
+
+});
+
+/* МУЗЫКАНЫ БАШКАРУУ */
+
+musicButton.addEventListener("click", async function() {
+
+    if (musicPlaying) {
+        stopMusic();
+    } else {
+        await startMusic();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
